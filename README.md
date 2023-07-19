@@ -1,4 +1,4 @@
-# **Welcome to the Discrete Math 2 Repository!**
+# **Welcome to the Computer Architecture Repository!**
 
 I am creating this in order to store and organize my notes as well as to have a record of the concepts we have learned throughout Discrete Math 2. As the semester continues, this repository will be updated and expanded (as best as possible) to ensure it remains a up to date.
 

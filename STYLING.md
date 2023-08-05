@@ -21,7 +21,6 @@ In order to do any kind of ascii art, you will need to use a code block. You can
 ```
 ***
 ## Topic Name
-***
 
 #### **_Summary:_**
 Summary!

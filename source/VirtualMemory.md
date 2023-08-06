@@ -82,15 +82,17 @@ Virtual Memory is similar to caching, but instead of caching data from a disk, i
 
 2. Determine the physical page number for each address by looking up the page table entry in the TLB
 
-  a. If the tag exists in the TLB, then the physical page number is the one in the TLB entry (proceed to step 3) [TLB Hit]
+    a. If the tag exists in the TLB, then the physical page number is the one in the TLB entry (proceed to step 3) [TLB Hit]
 
-  b. If the tag does not exist in the TLB, then you will have to query the page table to find the physical page number
+    b. If the tag does not exist in the TLB, then you will have to query the page table to find the physical page number
 
-  - If the page table entry is valid, then the physical page number is the one in the page table entry (proceed to step 3) [Page Hit]
+    - If the page table entry is valid, then the physical page number is the one in the page table entry (proceed to step 3) [Page Hit]
 
-  - If the page table entry is "Disk", then you take the largest physical page number present in the Page Table, multiply it by 2, and then set the physical page number of the page table entry to that value (proceed to step 3) [Page Fault]
+    - If the page table entry is "Disk", then you take the largest physical page number present in the Page Table, multiply it by 2, and then set the physical page number of the page table entry to that value (proceed to step 3) [Page Fault]
 
 3. Update the TLB by inserting the tag and physical page number into the TLB entry that has the highest LRU value, and setting that entry's LRU value to 0. Then increment every other value by 1 (you should only ever have 0,1,2, and 3 in the LRUs)
+
+##### Final Page Table:
 
 | Index | Valid | Physical Page Number |
 |-------|-------|---------------------|
@@ -117,6 +119,7 @@ Virtual Memory is similar to caching, but instead of caching data from a disk, i
 | 20 | 1 | 10 |
 | 21 | 1 | 14 |
 
+##### Final TLB:
 | Valid | Tag | Physical Page Number | LRU |
 |-------|-----|---------------------|-----|
 | 1 | 0 | 112 | 1 |
@@ -124,6 +127,7 @@ Virtual Memory is similar to caching, but instead of caching data from a disk, i
 | 1 | 1 | 56 | 3 |
 | 1 | 10 | 3 | 0 |
 
+##### Final Results:
 | Address | Page Number | Result |
 |---------|-------------|--------|
 | 12068   | 2           | TLB Hit|

@@ -18,67 +18,70 @@ Virtual Memory is similar to caching, but instead of caching data from a disk, i
 
 #### **_Example:_**
 
-##### Given Information: 
-- 4KiB page size = 4096 bytes
-- Entries :
+  Given Information: 
+  - 4KiB page size = 4096 bytes
+  - Entries :
+    - 12068, 
+    - 10756, 
+    - 10746,
+    - 35527,
+    - 4229, 
+    - 2446,
+    - 12064, 
+    - 2447, 
+    - 44510
 
-  - 12068, 
-  - 10756, 
-  - 10746,
-  - 35527,
-  - 4229, 
-  - 2446,
-  - 12064, 
-  - 2447, 
-  - 44510
+  Initial Page Table:
 
-##### Initial Page Table:
-| Index | Valid | Physical Page Number |
-|-------|-------|---------------------|
-| 0 | 0 | Disk |
-| 1 | 0 | Disk |
-| 2 | 1 | 5 |
-| 3 | 1 | 6 |
-| 4 | 1 | 9 |
-| 5 | 1 | 11 |
-| 6 | 0 | Disk |
-| 7 | 1 | 4 |
-| 8 | 0 | Disk |
-| 9 | 0 | Disk |
-| 10 | 1 | 3 |
-| 11 | 1 | 12 |
-| 12 | 1 | 7 |
-| 13 | 1 | 8 |
-| 14 | 0 | Disk |
-| 15 | 0 | Disk |
-| 16 | 0 | Disk |
-| 17 | 0 | Disk |
-| 18 | 1 | 2 |
-| 19 | 0 | Disk |
-| 20 | 1 | 10 |
-| 21 | 1 | 14 |
+  | Index | Valid | Physical Page Number |
+  |-------|-------|---------------------|
+  | 0 | 0 | Disk |
+  | 1 | 0 | Disk |
+  | 2 | 1 | 5 |
+  | 3 | 1 | 6 |
+  | 4 | 1 | 9 |
+  | 5 | 1 | 11 |
+  | 6 | 0 | Disk |
+  | 7 | 1 | 4 |
+  | 8 | 0 | Disk |
+  | 9 | 0 | Disk |
+  | 10 | 1 | 3 |
+  | 11 | 1 | 12 |
+  | 12 | 1 | 7 |
+  | 13 | 1 | 8 |
+  | 14 | 0 | Disk |
+  | 15 | 0 | Disk |
+  | 16 | 0 | Disk |
+  | 17 | 0 | Disk |
+  | 18 | 1 | 2 |
+  | 19 | 0 | Disk |
+  | 20 | 1 | 10 |
+  | 21 | 1 | 14 |
 
-##### Initial TLB:
-| Valid | Tag | Physical Page Number | LRU |
-|-------|-----|---------------------|-----|
-| 1 | 20 | 10 | 0 |
-| 1 | 2 | 5 | 1 |
-| 1 | 3 | 6 | 2 |
-| 0 | 0 | 15 | 3 |
 
+  Initial TLB:
+  
+  | Valid | Tag | Physical Page Number | LRU |
+  |-------|-----|---------------------|-----|
+  | 1 | 20 | 10 | 0 |
+  | 1 | 2 | 5 | 1 |
+  | 1 | 3 | 6 | 2 |
+  | 0 | 0 | 15 | 3 |
+
+***
 1. Determine the indices of the page table entries that are accessed for each address by dividing each address by the page size in bytes (with no remainder)
 
-| Address | Page Number |
-|---------|-------------|
-| 12068   | 2           |
-| 10756   | 2           |
-| 10746   | 2           |
-| 35527   | 8           |
-| 4229    | 1           |
-| 2446    | 0           |
-| 12064   | 2           |
-| 2447    | 0           |
-| 44510   | 10          |
+    | Address | Page Number |
+    |---------|-------------|
+    | 12068   | 2           |
+    | 10756   | 2           |
+    | 10746   | 2           |
+    | 35527   | 8           |
+    | 4229    | 1           |
+    | 2446    | 0           |
+    | 12064   | 2           |
+    | 2447    | 0           |
+    | 44510   | 10          |
 
 2. Determine the physical page number for each address by looking up the page table entry in the TLB
 
@@ -92,53 +95,53 @@ Virtual Memory is similar to caching, but instead of caching data from a disk, i
 
 3. Update the TLB by inserting the tag and physical page number into the TLB entry that has the highest LRU value, and setting that entry's LRU value to 0. Then increment every other value by 1 (you should only ever have 0,1,2, and 3 in the LRUs)
 
-##### Final Page Table:
+    ##### Final Page Table:
 
-| Index | Valid | Physical Page Number |
-|-------|-------|---------------------|
-| 0 | 1 | 112 |
-| 1 | 1 | 56 |
-| 2 | 1 | 5 |
-| 3 | 1 | 6 |
-| 4 | 1 | 9 |
-| 5 | 1 | 11 |
-| 6 | 0 | Disk |
-| 7 | 1 | 4 |
-| 8 | 0 | 28 |
-| 9 | 0 | Disk |
-| 10 | 1 | 3 |
-| 11 | 1 | 12 |
-| 12 | 1 | 7 |
-| 13 | 1 | 8 |
-| 14 | 0 | Disk |
-| 15 | 0 | Disk |
-| 16 | 0 | Disk |
-| 17 | 0 | Disk |
-| 18 | 1 | 2 |
-| 19 | 0 | Disk |
-| 20 | 1 | 10 |
-| 21 | 1 | 14 |
+    | Index | Valid | Physical Page Number |
+    |-------|-------|---------------------|
+    | 0 | 1 | 112 |
+    | 1 | 1 | 56 |
+    | 2 | 1 | 5 |
+    | 3 | 1 | 6 |
+    | 4 | 1 | 9 |
+    | 5 | 1 | 11 |
+    | 6 | 0 | Disk |
+    | 7 | 1 | 4 |
+    | 8 | 0 | 28 |
+    | 9 | 0 | Disk |
+    | 10 | 1 | 3 |
+    | 11 | 1 | 12 |
+    | 12 | 1 | 7 |
+    | 13 | 1 | 8 |
+    | 14 | 0 | Disk |
+    | 15 | 0 | Disk |
+    | 16 | 0 | Disk |
+    | 17 | 0 | Disk |
+    | 18 | 1 | 2 |
+    | 19 | 0 | Disk |
+    | 20 | 1 | 10 |
+    | 21 | 1 | 14 |
 
-##### Final TLB:
-| Valid | Tag | Physical Page Number | LRU |
-|-------|-----|---------------------|-----|
-| 1 | 0 | 112 | 1 |
-| 1 | 2 | 5 | 2 |
-| 1 | 1 | 56 | 3 |
-| 1 | 10 | 3 | 0 |
+    ##### Final TLB:
+    | Valid | Tag | Physical Page Number | LRU |
+    |-------|-----|---------------------|-----|
+    | 1 | 0 | 112 | 1 |
+    | 1 | 2 | 5 | 2 |
+    | 1 | 1 | 56 | 3 |
+    | 1 | 10 | 3 | 0 |
 
-##### Final Results:
-| Address | Page Number | Result |
-|---------|-------------|--------|
-| 12068   | 2           | TLB Hit|
-| 10756   | 2           | TLB Hit|
-| 10746   | 2           | TLB Hit|
-| 35527   | 8           | Page Fault |
-| 4229    | 1           | Page Fault |
-| 2446    | 0           | Page Fault |
-| 12064   | 2           | TLB Hit|
-| 2447    | 0           | TLB Hit|
-| 44510   | 10          | Page Hit |
+    ##### Final Results:
+    | Address | Page Number | Result |
+    |---------|-------------|--------|
+    | 12068   | 2           | TLB Hit|
+    | 10756   | 2           | TLB Hit|
+    | 10746   | 2           | TLB Hit|
+    | 35527   | 8           | Page Fault |
+    | 4229    | 1           | Page Fault |
+    | 2446    | 0           | Page Fault |
+    | 12064   | 2           | TLB Hit|
+    | 2447    | 0           | TLB Hit|
+    | 44510   | 10          | Page Hit |
 
 
 #### **_Tricky Things to Remember:_**

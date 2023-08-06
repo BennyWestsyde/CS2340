@@ -92,17 +92,6 @@ Virtual Memory is similar to caching, but instead of caching data from a disk, i
 
 3. Update the TLB by inserting the tag and physical page number into the TLB entry that has the highest LRU value, and setting that entry's LRU value to 0. Then increment every other value by 1 (you should only ever have 0,1,2, and 3 in the LRUs)
 
-
-12068//4096 = 2 \
-10756//4096 = 2 \
-10746//4096 = 2 \
-35527//4096 = 8 \
-4229//4096 = 1 \
-2446//4096 = 0 \
-12064//4096 = 2 \
-2447//4096 = 0 \
-44510//4096 = 10
-
 | Index | Valid | Physical Page Number |
 |-------|-------|---------------------|
 | 0 | 1 | 112 |

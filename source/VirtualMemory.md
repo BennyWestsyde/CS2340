@@ -18,7 +18,7 @@ Virtual Memory is similar to caching, but instead of caching data from a disk, i
 
 #### **_Example:_**
 
-  Given Information: 
+  **Given Information:** 
   - 4KiB page size = 4096 bytes
   - Entries :
     - 12068, 
@@ -31,7 +31,7 @@ Virtual Memory is similar to caching, but instead of caching data from a disk, i
     - 2447, 
     - 44510
 
-  Initial Page Table:
+  **Initial Page Table:**
 
   | Index | Valid | Physical Page Number |
   |-------|-------|---------------------|
@@ -59,8 +59,8 @@ Virtual Memory is similar to caching, but instead of caching data from a disk, i
   | 21 | 1 | 14 |
 
 
-  Initial TLB:
-  
+  **Initial TLB:**
+
   | Valid | Tag | Physical Page Number | LRU |
   |-------|-----|---------------------|-----|
   | 1 | 20 | 10 | 0 |
@@ -68,7 +68,6 @@ Virtual Memory is similar to caching, but instead of caching data from a disk, i
   | 1 | 3 | 6 | 2 |
   | 0 | 0 | 15 | 3 |
 
-***
 1. Determine the indices of the page table entries that are accessed for each address by dividing each address by the page size in bytes (with no remainder)
 
     | Address | Page Number |
@@ -95,7 +94,7 @@ Virtual Memory is similar to caching, but instead of caching data from a disk, i
 
 3. Update the TLB by inserting the tag and physical page number into the TLB entry that has the highest LRU value, and setting that entry's LRU value to 0. Then increment every other value by 1 (you should only ever have 0,1,2, and 3 in the LRUs)
 
-    ##### Final Page Table:
+    **Final Page Table:**
 
     | Index | Valid | Physical Page Number |
     |-------|-------|---------------------|
@@ -122,7 +121,7 @@ Virtual Memory is similar to caching, but instead of caching data from a disk, i
     | 20 | 1 | 10 |
     | 21 | 1 | 14 |
 
-    ##### Final TLB:
+    **Final TLB:**
     | Valid | Tag | Physical Page Number | LRU |
     |-------|-----|---------------------|-----|
     | 1 | 0 | 112 | 1 |
@@ -130,7 +129,7 @@ Virtual Memory is similar to caching, but instead of caching data from a disk, i
     | 1 | 1 | 56 | 3 |
     | 1 | 10 | 3 | 0 |
 
-    ##### Final Results:
+    **Final Results:**
     | Address | Page Number | Result |
     |---------|-------------|--------|
     | 12068   | 2           | TLB Hit|
